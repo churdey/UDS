@@ -39,6 +39,16 @@ hydro_yes=[0,0,0]
 hydro_no=[0,0,0]
 hydro_unk=[0,0,0]
 
+hx_augmentation_y=[0,0,0]
+hx_augmentation_n=[0,0,0]
+
+hx_cath_y=[0,0,0]
+hx_cath_n=[0,0,0]
+
+recent_uti_y=[0,0,0]
+recent_uti_n=[0,0,0]
+recent_uti_unk=[0,0,0]
+
 # Script Parsing
 for j in your_list[1:]:
 
@@ -193,8 +203,63 @@ for j in your_list[1:]:
 		if j[231] == "positive":
 			hydro_unk[0] = hydro_unk[0]+1
 		hydro_unk[2] = hydro_unk[2]+1
-# Hydronephrosis counting section end		
-		
+# Hydronephrosis counting section end
+
+# HxAugmentation counting section begin
+	if j[177] == "Checked": #This means yes
+		if j[231] == "negative":
+			hx_augmentation_y[1] = hx_augmentation_y[1]+1
+		if j[231] == "positive":
+			hx_augmentation_y[0] = hx_augmentation_y[0]+1
+		hx_augmentation_y[2] = hx_augmentation_y[2]+1
+	
+	if j[177] == "Unchecked": #This means no
+		if j[231] == "negative":
+			hx_augmentation_n[1] = hx_augmentation_n[1]+1
+		if j[231] == "positive":
+			hx_augmentation_n[0] = hx_augmentation_n[0]+1
+		hx_augmentation_n[2] = hx_augmentation_n[2]+1
+# HxAugmentation counting section end
+
+# HxCatheterizable Channel counting section begin
+	if (j[175] == "Checked") or (j[176] == "Checked"): #This means yes
+		if j[231] == "negative":
+			hx_cath_y[1] = hx_cath_y[1]+1
+		if j[231] == "positive":
+			hx_cath_y[0] = hx_cath_y[0]+1
+		hx_cath_y[2] = hx_cath_y[2]+1
+	
+	if (j[175] == "Unchecked") and (j[176] == "Unchecked"): #This means no
+		if j[231] == "negative":
+			hx_cath_n[1] = hx_cath_n[1]+1
+		if j[231] == "positive":
+			hx_cath_n[0] = hx_cath_n[0]+1
+		hx_cath_n[2] = hx_cath_n[2]+1
+# HxCatheterizable Channel counting section end	
+
+# Recent UTI counting section begin
+	if j[188] == "Yes":
+		if j[231] == "negative":
+			recent_uti_y[1] = recent_uti_y[1]+1
+		if j[231] == "positive":
+			recent_uti_y[0] = recent_uti_y[0]+1
+		recent_uti_y[2] = recent_uti_y[2]+1
+	
+	if j[188] == "No":
+		if j[231] == "negative":
+			recent_uti_n[1] = recent_uti_n[1]+1
+		if j[231] == "positive":
+			recent_uti_n[0] = recent_uti_n[0]+1
+		recent_uti_n[2] = recent_uti_n[2]+1
+
+	if (j[188] == "N/A") or (j[188] == "Unknown"):
+		if j[231] == "negative":
+			recent_uti_unk[1] = recent_uti_unk[1]+1
+		if j[231] == "positive":
+			recent_uti_unk[0] = recent_uti_unk[0]+1
+		recent_uti_unk[2] = recent_uti_unk[2]+1
+# Recent UTI Channel counting section end	
+
 # Total counting section begin	
 	if j[231] == "negative":
 		sum_no = sum_no+1
@@ -202,6 +267,8 @@ for j in your_list[1:]:
 		sum_yes = sum_yes+1
 	sum_total = sum_total+1
 # Total counting section end
+
+
 print "<1       - yes: " + str(sum_less_one[0]) + "\t no: " + str(sum_less_one[1]) + "\t total: " + str(sum_less_one[2])
 	
 print "1 - <6   - yes: " + str(sum_one_six[0]) + "\t no: " + str(sum_one_six[1]) + "\t total: " + str(sum_one_six[2])
@@ -247,6 +314,24 @@ print "HydroYes - yes: " + str(hydro_yes[0]) + "\t no: " + str(hydro_yes[1]) + "
 
 print "HydroUnk - yes: " + str(hydro_unk[0]) + "\t no: " + str(hydro_unk[1]) + "\t total: " + str(hydro_unk[2])
 print
-#----	
+#----
+print "AugmentY - yes: " + str(hx_augmentation_y[0]) + "\t no: " + str(hx_augmentation_y[1]) + "\t total: " + str(hx_augmentation_y[2])
+
+print "AugmentN - yes: " + str(hx_augmentation_n[0]) + "\t no: " + str(hx_augmentation_n[1]) + "\t total: " + str(hx_augmentation_n[2])
+print
+#----
+print "CathY    - yes: " + str(hx_cath_y[0]) + "\t no: " + str(hx_cath_y[1]) + "\t total: " + str(hx_cath_y[2])
+
+print "CathN    - yes: " + str(hx_cath_n[0]) + "\t no: " + str(hx_cath_n[1]) + "\t total: " + str(hx_cath_n[2])
+print
+#----
+print "UTI No   - yes: " + str(recent_uti_n[0]) + "\t no: " + str(recent_uti_n[1]) + "\t total: " + str(recent_uti_n[2])
+
+print "UTI Yes  - yes: " + str(recent_uti_y[0]) + "\t no: " + str(recent_uti_y[1]) + "\t total: " + str(recent_uti_y[2])
+
+print "UTI Unk  - yes: " + str(recent_uti_unk[0]) + "\t no: " + str(recent_uti_unk[1]) + "\t total: " + str(recent_uti_unk[2])
+print
+#----
+		
 print "Total    - yes: " + str(sum_yes) + "\t no: " + str(sum_no) + "\t total: " + str(sum_total)
 	
