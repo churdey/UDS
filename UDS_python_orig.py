@@ -4,9 +4,10 @@ with open('forchris_python.csv', 'rb') as f:
     reader = csv.reader(f)
     your_list = list(reader)
 
-MasterList=[]
-
-HeaderPrint=["Description, <1_pos, <1_neg, 1-<6_pos, 1-<6_neg, 6-<11_pos, 6-<11_neg, 11-<15_pos, 11-<15_neg, 15-<18_pos, 15-<18_neg, >18_pos, >18_neg, sex_f_pos, sex_f_neg, sex_m_pos, sex_m_neg, race_white_pos, race_white_neg, race_black_pos, race_black_neg, race_asian_pos, race_asian_neg, race_other_pos, race_other_neg, race_hispanic_pos, race_hispanic_neg, race_non-hispanic_pos, race_non-hispanic_neg, circumcised_pos, circumcised_neg, uncircumcised_pos, uncircumcised_neg, unknown_circ_pos, unknown_circ_neg, hydro_yes_pos, hydro_yes_neg, hydro_no_pos, hydro_no_neg, hydro_unknown_pos, hydro_unknown_neg, hx_augment_yes_pos, hx_augment_yes_neg, hx_augment_no_pos, hx_augment_no_neg, hx_cath_yes_pos, hx_cath_yes_neg, hx_cath_no_pos, hx_cath_no_neg, recent_uti_yes_pos, recent_uti_yes_neg, recent_uti_no_pos, recent_uti_no_neg, recent_uti_unk_pos, recent_uti_unk_neg, VUR1-2_pos, VUR1-2_neg, VUR3-5_pos, VUR3-5_neg, VURunk_pos, VURunk_neg, VUR_yes_pos, VUR_yes_neg, VUR_no_pos, VUR_no_neg, Eti-Myel_pos, Eti-Myel_neg, Eti-Fatt_pos, Eti-Fatt_neg, Eti-Othe_pos, Eti-Othe_neg, Sum_yes, Sum_no, Sum_total"]
+i = 0
+#for j in your_list[0]:
+#	print str(i) + " " + j
+#	i = i + 1
 
 chkValsAll=[[231,"negative","positive","Col HX: If Culture"], \
             [232,"Unchecked","Checked","Col HY: E.Coli"], \
@@ -26,7 +27,7 @@ chkValsAll=[[231,"negative","positive","Col HX: If Culture"], \
 
 for chkVals in chkValsAll:
 	# Initialization of variables
-	#print "\n" + chkVals[3] + "\n"
+	print "\n" + chkVals[3] + "\n"
 	sum_yes=0
 	sum_no=0
 	sum_total=0
@@ -354,145 +355,88 @@ for chkVals in chkValsAll:
 			sum_yes = sum_yes+1
 		sum_total = sum_total+1
 	# Total counting section end
-	sum_list=[]
-	sum_list.append(sum_yes)
-	sum_list.append(sum_no)
-	sum_list.append(sum_total)
-	MasterSubList = []
-	MasterSubList.append(chkVals[3])
-	MasterSubList.append(sum_less_one)
-	MasterSubList.append(sum_one_six)
-	MasterSubList.append(sum_six_eleven)
-	MasterSubList.append(sum_eleven_fifteen)
-	MasterSubList.append(sum_fifteen_eighteen)
-	MasterSubList.append(sum_greater_eighteen)
-	MasterSubList.append(sex_f)
-	MasterSubList.append(sex_m)
-	MasterSubList.append(race_w)
-	MasterSubList.append(race_b)
-	MasterSubList.append(race_a)
-	MasterSubList.append(race_o)
-	MasterSubList.append(race_his)
-	MasterSubList.append(race_nhis)
-	MasterSubList.append(circumcised)
-	MasterSubList.append(uncircumcised)
-	MasterSubList.append(unknown_circ)
-	MasterSubList.append(hydro_yes)
-	MasterSubList.append(hydro_no)
-	MasterSubList.append(hydro_unk)
-	MasterSubList.append(hx_augmentation_y)
-	MasterSubList.append(hx_augmentation_n)
-	MasterSubList.append(hx_cath_y)
-	MasterSubList.append(hx_cath_n)
-	MasterSubList.append(recent_uti_y)
-	MasterSubList.append(recent_uti_n)
-	MasterSubList.append(recent_uti_unk)
-	MasterSubList.append(VUR_1_2)
-	MasterSubList.append(VUR_3_5)
-	MasterSubList.append(VUR_unk)
-	MasterSubList.append(VUR_y)
-	MasterSubList.append(VUR_n)
-	MasterSubList.append(etiology_myel)
-	MasterSubList.append(etiology_fatt)
-	MasterSubList.append(etiology_othe)
-	MasterSubList.append(sum_list)
-	
-	#print MasterSubList
-	MasterList.append(MasterSubList)
-	#print MasterList
-	
-	# print "Description\t" + chkVals[2][:3] + "\t" + chkVals[1][:3] + "\tSum"
-	# print "<1:        \t" + str(sum_less_one[0]) + "\t" + str(sum_less_one[1]) + "\t" + str(sum_less_one[2])
+
+	print "Description\t" + chkVals[2][:3] + "\t" + chkVals[1][:3] + "\tSum"
+	print "<1:        \t" + str(sum_less_one[0]) + "\t" + str(sum_less_one[1]) + "\t" + str(sum_less_one[2])
 		
-	# print "1 - <6     \t" + str(sum_one_six[0]) + "\t" + str(sum_one_six[1]) + "\t" + str(sum_one_six[2])
+	print "1 - <6     \t" + str(sum_one_six[0]) + "\t" + str(sum_one_six[1]) + "\t" + str(sum_one_six[2])
 
-	# print "6 - <11    \t"+ str(sum_six_eleven[0]) + "\t" + str(sum_six_eleven[1]) + "\t" + str(sum_six_eleven[2])
+	print "6 - <11    \t"+ str(sum_six_eleven[0]) + "\t" + str(sum_six_eleven[1]) + "\t" + str(sum_six_eleven[2])
 
-	# print "11 - <15   \t" + str(sum_eleven_fifteen[0]) + "\t" + str(sum_eleven_fifteen[1]) + "\t" + str(sum_eleven_fifteen[2])
+	print "11 - <15   \t" + str(sum_eleven_fifteen[0]) + "\t" + str(sum_eleven_fifteen[1]) + "\t" + str(sum_eleven_fifteen[2])
 
-	# print "15 - <18   \t" + str(sum_fifteen_eighteen[0]) + "\t" + str(sum_fifteen_eighteen[1]) + "\t" + str(sum_fifteen_eighteen[2])
+	print "15 - <18   \t" + str(sum_fifteen_eighteen[0]) + "\t" + str(sum_fifteen_eighteen[1]) + "\t" + str(sum_fifteen_eighteen[2])
 
-	# print ">18        \t" + str(sum_greater_eighteen[0]) + "\t" + str(sum_greater_eighteen[1]) + "\t" + str(sum_greater_eighteen[2])
+	print ">18        \t" + str(sum_greater_eighteen[0]) + "\t" + str(sum_greater_eighteen[1]) + "\t" + str(sum_greater_eighteen[2])
 	
-	# #----
-	# print "Female     \t" + str(sex_f[0]) + "\t" + str(sex_f[1]) + "\t" + str(sex_f[2])
+	#----
+	print "Female     \t" + str(sex_f[0]) + "\t" + str(sex_f[1]) + "\t" + str(sex_f[2])
 
-	# print "Male       \t" + str(sex_m[0]) + "\t" + str(sex_m[1]) + "\t" + str(sex_m[2])
+	print "Male       \t" + str(sex_m[0]) + "\t" + str(sex_m[1]) + "\t" + str(sex_m[2])
 	
-	# #----
-	# print "White      \t" + str(race_w[0]) + "\t" + str(race_w[1]) + "\t" + str(race_w[2])
+	#----
+	print "White      \t" + str(race_w[0]) + "\t" + str(race_w[1]) + "\t" + str(race_w[2])
 
-	# print "Black      \t" + str(race_b[0]) + "\t" + str(race_b[1]) + "\t" + str(race_b[2])
+	print "Black      \t" + str(race_b[0]) + "\t" + str(race_b[1]) + "\t" + str(race_b[2])
 
-	# print "Asian      \t" + str(race_a[0]) + "\t" + str(race_a[1]) + "\t" + str(race_a[2])
+	print "Asian      \t" + str(race_a[0]) + "\t" + str(race_a[1]) + "\t" + str(race_a[2])
 
-	# print "Other      \t" + str(race_o[0]) + "\t" + str(race_o[1]) + "\t" + str(race_o[2])
+	print "Other      \t" + str(race_o[0]) + "\t" + str(race_o[1]) + "\t" + str(race_o[2])
 	
-	# #----
-	# print "Hispanic   \t" + str(race_his[0]) + "\t" + str(race_his[1]) + "\t" + str(race_his[2])
+	#----
+	print "Hispanic   \t" + str(race_his[0]) + "\t" + str(race_his[1]) + "\t" + str(race_his[2])
 
-	# print "nonHispa   \t" + str(race_nhis[0]) + "\t" + str(race_nhis[1]) + "\t" + str(race_nhis[2])
+	print "nonHispa   \t" + str(race_nhis[0]) + "\t" + str(race_nhis[1]) + "\t" + str(race_nhis[2])
 	
-	# #----
-	# print "Circumci   \t" + str(circumcised[0]) + "\t" + str(circumcised[1]) + "\t" + str(circumcised[2])
+	#----
+	print "Circumci   \t" + str(circumcised[0]) + "\t" + str(circumcised[1]) + "\t" + str(circumcised[2])
 
-	# print "UnCircum   \t" + str(uncircumcised[0]) + "\t" + str(uncircumcised[1]) + "\t" + str(uncircumcised[2])
+	print "UnCircum   \t" + str(uncircumcised[0]) + "\t" + str(uncircumcised[1]) + "\t" + str(uncircumcised[2])
 
-	# print "Unknown    \t" + str(unknown_circ[0]) + "\t" + str(unknown_circ[1]) + "\t" + str(unknown_circ[2])
+	print "Unknown    \t" + str(unknown_circ[0]) + "\t" + str(unknown_circ[1]) + "\t" + str(unknown_circ[2])
 	
-	# #----
-	# print "HydroYes   \t" + str(hydro_yes[0]) + "\t" + str(hydro_yes[1]) + "\t" + str(hydro_yes[2])
+	#----
+	print "Hydro No   \t" + str(hydro_no[0]) + "\t" + str(hydro_no[1]) + "\t" + str(hydro_no[2])
+
+	print "HydroYes   \t" + str(hydro_yes[0]) + "\t" + str(hydro_yes[1]) + "\t" + str(hydro_yes[2])
+
+	print "HydroUnk   \t" + str(hydro_unk[0]) + "\t" + str(hydro_unk[1]) + "\t" + str(hydro_unk[2])
 	
-	# print "Hydro No   \t" + str(hydro_no[0]) + "\t" + str(hydro_no[1]) + "\t" + str(hydro_no[2])
+	#----
+	print "AugmentY   \t" + str(hx_augmentation_y[0]) + "\t" + str(hx_augmentation_y[1]) + "\t" + str(hx_augmentation_y[2])
 
-	# print "HydroUnk   \t" + str(hydro_unk[0]) + "\t" + str(hydro_unk[1]) + "\t" + str(hydro_unk[2])
+	print "AugmentN   \t" + str(hx_augmentation_n[0]) + "\t" + str(hx_augmentation_n[1]) + "\t" + str(hx_augmentation_n[2])
 	
-	# #----
-	# print "AugmentY   \t" + str(hx_augmentation_y[0]) + "\t" + str(hx_augmentation_y[1]) + "\t" + str(hx_augmentation_y[2])
+	#----
+	print "CathY      \t" + str(hx_cath_y[0]) + "\t" + str(hx_cath_y[1]) + "\t" + str(hx_cath_y[2])
 
-	# print "AugmentN   \t" + str(hx_augmentation_n[0]) + "\t" + str(hx_augmentation_n[1]) + "\t" + str(hx_augmentation_n[2])
+	print "CathN      \t" + str(hx_cath_n[0]) + "\t" + str(hx_cath_n[1]) + "\t" + str(hx_cath_n[2])
+
+	#----
+	print "UTI No     \t" + str(recent_uti_n[0]) + "\t" + str(recent_uti_n[1]) + "\t" + str(recent_uti_n[2])
+
+	print "UTI Yes    \t" + str(recent_uti_y[0]) + "\t" + str(recent_uti_y[1]) + "\t" + str(recent_uti_y[2])
+
+	print "UTI Unk    \t" + str(recent_uti_unk[0]) + "\t" + str(recent_uti_unk[1]) + "\t" + str(recent_uti_unk[2])
 	
-	# #----
-	# print "CathY      \t" + str(hx_cath_y[0]) + "\t" + str(hx_cath_y[1]) + "\t" + str(hx_cath_y[2])
+	#----
+	print "VUR1-2     \t" + str(VUR_1_2[0]) + "\t" + str(VUR_1_2[1]) + "\t" + str(VUR_1_2[2])
 
-	# print "CathN      \t" + str(hx_cath_n[0]) + "\t" + str(hx_cath_n[1]) + "\t" + str(hx_cath_n[2])
+	print "VUR3-5     \t" + str(VUR_3_5[0]) + "\t" + str(VUR_3_5[1]) + "\t" + str(VUR_3_5[2])
 
-	# #----
-	# print "UTI Yes    \t" + str(recent_uti_y[0]) + "\t" + str(recent_uti_y[1]) + "\t" + str(recent_uti_y[2])
+	print "VURunk     \t" + str(VUR_unk[0]) + "\t" + str(VUR_unk[1]) + "\t" + str(VUR_unk[2])
+
+	print "VUR Yes    \t" + str(VUR_y[0]) + "\t" + str(VUR_y[1]) + "\t" + str(VUR_y[2])
+
+	print "VUR No     \t" + str(VUR_n[0]) + "\t" + str(VUR_n[1]) + "\t" + str(VUR_n[2])
 	
-	# print "UTI No     \t" + str(recent_uti_n[0]) + "\t" + str(recent_uti_n[1]) + "\t" + str(recent_uti_n[2])
+	#----
+	print "Eti-Myel   \t" + str(etiology_myel[0]) + "\t" + str(etiology_myel[1]) + "\t" + str(etiology_myel[2])
 
-	# print "UTI Unk    \t" + str(recent_uti_unk[0]) + "\t" + str(recent_uti_unk[1]) + "\t" + str(recent_uti_unk[2])
+	print "Eti-Fatt   \t" + str(etiology_fatt[0]) + "\t" + str(etiology_fatt[1]) + "\t" + str(etiology_fatt[2])
+
+	print "Eti-Othe   \t" + str(etiology_othe[0]) + "\t" + str(etiology_othe[1]) + "\t" + str(etiology_othe[2])
 	
-	# #----
-	# print "VUR1-2     \t" + str(VUR_1_2[0]) + "\t" + str(VUR_1_2[1]) + "\t" + str(VUR_1_2[2])
-
-	# print "VUR3-5     \t" + str(VUR_3_5[0]) + "\t" + str(VUR_3_5[1]) + "\t" + str(VUR_3_5[2])
-
-	# print "VURunk     \t" + str(VUR_unk[0]) + "\t" + str(VUR_unk[1]) + "\t" + str(VUR_unk[2])
-
-	# print "VUR Yes    \t" + str(VUR_y[0]) + "\t" + str(VUR_y[1]) + "\t" + str(VUR_y[2])
-
-	# print "VUR No     \t" + str(VUR_n[0]) + "\t" + str(VUR_n[1]) + "\t" + str(VUR_n[2])
+	#----
+	print "Total      \t" + str(sum_yes) + "\t" + str(sum_no) + "\t" + str(sum_total)
 	
-	# #----
-	# print "Eti-Myel   \t" + str(etiology_myel[0]) + "\t" + str(etiology_myel[1]) + "\t" + str(etiology_myel[2])
-
-	# print "Eti-Fatt   \t" + str(etiology_fatt[0]) + "\t" + str(etiology_fatt[1]) + "\t" + str(etiology_fatt[2])
-
-	# print "Eti-Othe   \t" + str(etiology_othe[0]) + "\t" + str(etiology_othe[1]) + "\t" + str(etiology_othe[2])
-	
-	# #----
-	# print "Total      \t" + str(sum_yes) + "\t" + str(sum_no) + "\t" + str(sum_total)
-
-intermediate_string = ""
-for l in HeaderPrint:
-	print l
-
-for printList in MasterList:
-	intermediate_string = intermediate_string + printList[0]
-	for results in printList[1:]:
-		#print results
-		intermediate_string = intermediate_string + ", " + str(results[0]) + ", " + str(results[1])
-	intermediate_string = intermediate_string + "\n"
-print intermediate_string
