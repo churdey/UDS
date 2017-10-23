@@ -1,80 +1,113 @@
 import csv
 
-with open('forchris_python.csv', 'rb') as f:
-    reader = csv.reader(f)
+def formattedOutput(fileName, data, headerFormatted):
+	with open(fileName, 'wb') as fout:
+		tempstring = ",,Overall,," +str(data[0])+"\n"
+		tempstring = tempstring + ",,,,Yes,,No\n"
+		tempstring = tempstring + ",,N,%,N,%,N,%\n"
+		tempstring = tempstring + "Overall,," + str(data[-1][2]) + ",," + str(data[-1][0]) + ",," + str(data[-1][1]) + "\n"
+		for results in data[2:]:
+			# check for divide by 0 error?
+			if data[-1][2] > 0:
+				percent1 = str(round(100*float(results[2])/float(data[-1][2]),2)) + "%"
+			else:
+				percent1 = str(0)
+			if results[2] > 0:
+				percent2 = str(round(100*float(results[0])/float(results[2]),2)) + "%"
+				percent3 = str(round(100*float(results[1])/float(results[2]),2)) + "%"
+			else:
+				percent2 = str(0)
+				percent3 = str(0)
+			tempstring = tempstring + results[3] + "," \
+			+ results[4] + "," \
+			+ str(results[2]) + "," \
+			+ percent1 + "," \
+			+ str(results[0]) + "," \
+			+ percent2 + "," \
+			+ str(results[1]) + "," \
+			+ percent3 + "," \
+			+ "\n"
+		fout.write(tempstring)
+		fout.close()
+	
+
+with open('forchris_python.csv', 'rb') as fin:
+    reader = csv.reader(fin)
     your_list = list(reader)
 
 MasterList=[]
 
 HeaderPrint=["Description, <1_pos, <1_neg, 1-<6_pos, 1-<6_neg, 6-<11_pos, 6-<11_neg, 11-<15_pos, 11-<15_neg, 15-<18_pos, 15-<18_neg, >18_pos, >18_neg, sex_f_pos, sex_f_neg, sex_m_pos, sex_m_neg, race_white_pos, race_white_neg, race_black_pos, race_black_neg, race_asian_pos, race_asian_neg, race_other_pos, race_other_neg, race_hispanic_pos, race_hispanic_neg, race_non-hispanic_pos, race_non-hispanic_neg, circumcised_pos, circumcised_neg, uncircumcised_pos, uncircumcised_neg, unknown_circ_pos, unknown_circ_neg, hydro_yes_pos, hydro_yes_neg, hydro_no_pos, hydro_no_neg, hydro_unknown_pos, hydro_unknown_neg, hx_augment_yes_pos, hx_augment_yes_neg, hx_augment_no_pos, hx_augment_no_neg, hx_cath_yes_pos, hx_cath_yes_neg, hx_cath_no_pos, hx_cath_no_neg, recent_uti_yes_pos, recent_uti_yes_neg, recent_uti_no_pos, recent_uti_no_neg, recent_uti_unk_pos, recent_uti_unk_neg, VUR1-2_pos, VUR1-2_neg, VUR3-5_pos, VUR3-5_neg, VURunk_pos, VURunk_neg, VUR_yes_pos, VUR_yes_neg, VUR_no_pos, VUR_no_neg, Eti-Myel_pos, Eti-Myel_neg, Eti-Fatt_pos, Eti-Fatt_neg, Eti-Othe_pos, Eti-Othe_neg, Sum_yes, Sum_no, Sum_total"]
 
-chkValsAll=[[231,"negative","positive","Col HX: If Culture"], \
-            [232,"Unchecked","Checked","Col HY: E.Coli"], \
-			[233,"Unchecked","Checked","Col HZ: Proteus"], \
-			[234,"Unchecked","Checked","Col IA: Pseudomonas"], \
-			[235,"Unchecked","Checked","Col IB: Enterococcus"],	\
-			[236,"Unchecked","Checked","Col IC: Klebsiella"], \
-			[237,"Unchecked","Checked","Col ID: Staphylococcus"], \
-			[252,"Unchecked","Checked","Col IS: Ciprofloxacin"], \
-			[340,"No","Yes","Col MC: Resistances"], \
-			[341,"Unchecked","Checked","Col MD: Bactrim"], \
-			[342,"Unchecked","Checked","Col ME: Amoxicillin"], \
-			[343,"Unchecked","Checked","Col MF: Augmentin"], \
-			[344,"Unchecked","Checked","Col MG: Nitrofurantoin"], \
-			[345,"Unchecked","Checked","Col MH: Cephalexin"]
+chkValsAll=[[231,"negative","positive","Col HX: If Culture","CulturePos.csv"], \
+            [232,"Unchecked","Checked","Col HY: E.Coli","EColi.csv"], \
+			[233,"Unchecked","Checked","Col HZ: Proteus","Proteus.csv"], \
+			[234,"Unchecked","Checked","Col IA: Pseudomonas","Pseudomonas.csv"], \
+			[235,"Unchecked","Checked","Col IB: Enterococcus","Enterococcus.csv"],	\
+			[236,"Unchecked","Checked","Col IC: Klebsiella","Klebsiella.csv"], \
+			[237,"Unchecked","Checked","Col ID: Staphylococcus","Staphy.csv"], \
+			[252,"Unchecked","Checked","Col IS: Ciprofloxacin","Cipro.csv"], \
+			[340,"No","Yes","Col MC: Resistances","Resistances.csv"], \
+			[341,"Unchecked","Checked","Col MD: Bactrim","Bactrim.csv"], \
+			[342,"Unchecked","Checked","Col ME: Amoxicillin","Amoxicillin.csv"], \
+			[343,"Unchecked","Checked","Col MF: Augmentin","Augmentin.csv"], \
+			[344,"Unchecked","Checked","Col MG: Nitrofurantoin","Nitrofurantoin.csv"], \
+			[345,"Unchecked","Checked","Col MH: Cephalexin","Cephalexin.csv"]
 			]
 
+headerFormatted = ["<1yr, 1 to <6, 6 to <11, 11 to <15, 15 to <18, 18 and greater, Sex-Female, Sex-Male, Race-White, Race-Black, Race-Asian, Race-Other, Race-Hispanic, Race-nonHispanic, Circ-Circumcised, Circ-Uncircumcised, Circ-Unknown state, Hydronephrosis-Yes, Hydronephrosis-No, Hydronephrosis-Unknown, Hx Augment-Yes, Hx Augment-No, Hx Catheterizable Channel-Yes, Hx Catheterizable Channel-No, Recent UTI-Yes, Recent UTI-No, Recent UTI-Unknown, VUR grade I to II, VUR grade III to V, VUR grade unknown, Etiology Myelomeningocele, Etiology Fatt, Etiology Other, Sum "]			
+			
 for chkVals in chkValsAll:
 	# Initialization of variables
 	#print "\n" + chkVals[3] + "\n"
 	sum_yes=0
 	sum_no=0
 	sum_total=0
-	sum_less_one=[0,0,0]
-	sum_one_six=[0,0,0]
-	sum_six_eleven=[0,0,0]
-	sum_eleven_fifteen=[0,0,0]
-	sum_fifteen_eighteen=[0,0,0]
-	sum_greater_eighteen=[0,0,0]
+	sum_less_one=[0,0,0,"Age","<1yr"]
+	sum_one_six=[0,0,0,"Age","1 to <6"]
+	sum_six_eleven=[0,0,0,"Age","6 to <11"]
+	sum_eleven_fifteen=[0,0,0,"Age","11 to <15"]
+	sum_fifteen_eighteen=[0,0,0,"Age","15 to <18"]
+	sum_greater_eighteen=[0,0,0,"Age","18 and older"]
 
-	sex_f=[0,0,0]
-	sex_m=[0,0,0]
+	sex_f=[0,0,0,"Sex","Female"]
+	sex_m=[0,0,0,"Sex","Male"]
 
-	race_w=[0,0,0]
-	race_b=[0,0,0]
-	race_a=[0,0,0]
-	race_o=[0,0,0]
+	race_w=[0,0,0,"Race","White"]
+	race_b=[0,0,0,"Race","Black/African"]
+	race_a=[0,0,0,"Race","Asian"]
+	race_o=[0,0,0,"Race","Other"]
 
-	race_his=[0,0,0]
-	race_nhis=[0,0,0]
+	race_his=[0,0,0,"Ethnicity/Race","Hispanic"]
+	race_nhis=[0,0,0,"Ethnicity/Race","nonHispanic"]
 
-	circumcised=[0,0,0]
-	uncircumcised=[0,0,0]
-	unknown_circ=[0,0,0]
+	circumcised=[0,0,0,"Circumcision","Circumcised"]
+	uncircumcised=[0,0,0,"Circumcision","Uncircumcised"]
+	unknown_circ=[0,0,0,"Circumcision","Unknown"]
 
-	hydro_yes=[0,0,0]
-	hydro_no=[0,0,0]
-	hydro_unk=[0,0,0]
+	hydro_yes=[0,0,0,"Hydronephrosis (Most Recent Test","Yes"]
+	hydro_no=[0,0,0,"Hydronephrosis (Most Recent Test","No"]
+	hydro_unk=[0,0,0,"Hydronephrosis (Most Recent Test","Unknown"]
 
-	hx_augmentation_y=[0,0,0]
-	hx_augmentation_n=[0,0,0]
+	hx_augmentation_y=[0,0,0,"Hx Augmentation","Yes"]
+	hx_augmentation_n=[0,0,0,"Hx Augmentation","No"]
 
-	hx_cath_y=[0,0,0]
-	hx_cath_n=[0,0,0]
+	hx_cath_y=[0,0,0,"Hx Catheterizable Channel","Yes"]
+	hx_cath_n=[0,0,0,"Hx Catheterizable Channel","No"]
 
-	recent_uti_y=[0,0,0]
-	recent_uti_n=[0,0,0]
-	recent_uti_unk=[0,0,0]
+	recent_uti_y=[0,0,0,"Recent UTI","Yes"]
+	recent_uti_n=[0,0,0,"Recent UTI","No"]
+	recent_uti_unk=[0,0,0,"Recent UTI","Unknown"]
 
-	VUR_1_2=[0,0,0]
-	VUR_3_5=[0,0,0]
-	VUR_unk=[0,0,0]
-	VUR_y=[0,0,0]
-	VUR_n=[0,0,0]
+	VUR_1_2=[0,0,0,"VUR (grade of those with VUR","VUR grade I to II"]
+	VUR_3_5=[0,0,0,"VUR (grade of those with VUR","VUR grade III to V"]
+	VUR_unk=[0,0,0,"VUR (grade of those with VUR","VUR grade unknown"]
+	VUR_y=[0,0,0,"VUR (most recent test","Yes"]
+	VUR_n=[0,0,0,"VUR (most recent test","No"]
 
-	etiology_myel=[0,0,0]
-	etiology_fatt=[0,0,0]
-	etiology_othe=[0,0,0]
+	etiology_myel=[0,0,0,"Etiology","Myelomeningocele"]
+	etiology_fatt=[0,0,0,"Etiology","Fatt"]
+	etiology_othe=[0,0,0,"Etiology","Other"]
 
 	# Script Parsing
 	for j in your_list[9:]:
@@ -358,8 +391,11 @@ for chkVals in chkValsAll:
 	sum_list.append(sum_yes)
 	sum_list.append(sum_no)
 	sum_list.append(sum_total)
+	sum_list.append("Sum")
+	sum_list.append("Sum")
 	MasterSubList = []
 	MasterSubList.append(chkVals[3])
+	MasterSubList.append(chkVals[4])
 	MasterSubList.append(sum_less_one)
 	MasterSubList.append(sum_one_six)
 	MasterSubList.append(sum_six_eleven)
@@ -491,8 +527,9 @@ for l in HeaderPrint:
 
 for printList in MasterList:
 	intermediate_string = intermediate_string + printList[0]
-	for results in printList[1:]:
+	for results in printList[2:]:
 		#print results
 		intermediate_string = intermediate_string + ", " + str(results[0]) + ", " + str(results[1])
+	formattedOutput(printList[1],printList,headerFormatted)	
 	intermediate_string = intermediate_string + "\n"
 print intermediate_string
