@@ -1,4 +1,4 @@
-,,Overall,,Col IG: Multiple Organism
+,,Overall,,Col NR: All Multiple
 ,,,,Yes,,No
 ,,N,% of Total,N,% of cohort,N,% of cohort
 Overall,,269,,7,,262
@@ -35,8 +35,6 @@ Overnight Foley,No,240,89.22%,5,2.08%,235,97.92%,
 Recent UTI,Yes,33,12.27%,1,3.03%,32,96.97%,
 Recent UTI,No,233,86.62%,6,2.58%,227,97.42%,
 Recent UTI,Unknown,3,1.12%,0,0.0%,3,100.0%,
-Antibiotic Prophylaxis,Yes,72,26.77%,0,0.0%,72,100.0%,
-Antibiotic Prophylaxis,No,197,73.23%,7,3.55%,190,96.45%,
 VUR (most recent test),Yes,44,16.36%,1,2.27%,43,97.73%,
 VUR (most recent test),No,225,83.64%,6,2.67%,219,97.33%,
 VUR (grade of those with VUR),VUR grade I to II,15,5.58%,0,0.0%,15,100.0%,

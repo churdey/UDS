@@ -4,7 +4,7 @@ def formattedOutput(fileName, data):
 	with open(fileName, 'wb') as fout:
 		tempstring = ",,Overall,," +str(data[0])+"\n"
 		tempstring = tempstring + ",,,,Yes,,No\n"
-		tempstring = tempstring + ",,N,%,N,%,N,%\n"
+		tempstring = tempstring + ",,N,% of Total,N,% of cohort,N,% of cohort\n"
 		tempstring = tempstring + "Overall,," + str(data[-1][2]) + ",," + str(data[-1][0]) + ",," + str(data[-1][1]) + "\n"
 		for results in data[2:]:
 			# check for divide by 0 error?
@@ -39,24 +39,62 @@ MasterList=[]
 
 HeaderPrint=["Description, <1_pos, <1_neg, 1-<6_pos, 1-<6_neg, 6-<11_pos, 6-<11_neg, 11-<15_pos, 11-<15_neg, 15-<18_pos, 15-<18_neg, >18_pos, >18_neg, sex_f_pos, sex_f_neg, sex_m_pos, sex_m_neg, race_white_pos, race_white_neg, race_black_pos, race_black_neg, race_asian_pos, race_asian_neg, race_other_pos, race_other_neg, race_hispanic_pos, race_hispanic_neg, race_non-hispanic_pos, race_non-hispanic_neg, circumcised_pos, circumcised_neg, uncircumcised_pos, uncircumcised_neg, unknown_circ_pos, unknown_circ_neg, hydro_yes_pos, hydro_yes_neg, hydro_no_pos, hydro_no_neg,  hx_augment_yes_pos, hx_augment_yes_neg, hx_augment_no_pos, hx_augment_no_neg, hx_cath_yes_pos, hx_cath_yes_neg, hx_cath_no_pos, hx_cath_no_neg, recent_uti_yes_pos, recent_uti_yes_neg, recent_uti_no_pos, recent_uti_no_neg, recent_uti_unk_pos, recent_uti_unk_neg, VUR1-2_pos, VUR1-2_neg, VUR3-5_pos, VUR3-5_neg, VURunk_pos, VURunk_neg, VUR_yes_pos, VUR_yes_neg, VUR_no_pos, VUR_no_neg, Eti-Myel_pos, Eti-Myel_neg, Eti-Fatt_pos, Eti-Fatt_neg, Eti-Othe_pos, Eti-Othe_neg, Sum_yes, Sum_no, Sum_total"]
 
-chkValsAll=[[231,"negative","positive","Col HX: If Culture","CulturePos.csv"], \
+chkValsAll=[[231,"negative","positive","Col HX: If Culture","01_culture_posvsneg.csv"], \
             [232,"Unchecked","Checked","Col HY: E.Coli","EColi.csv"], \
 			[233,"Unchecked","Checked","Col HZ: Proteus","Proteus.csv"], \
 			[234,"Unchecked","Checked","Col IA: Pseudomonas","Pseudomonas.csv"], \
 			[235,"Unchecked","Checked","Col IB: Enterococcus","Enterococcus.csv"],	\
 			[236,"Unchecked","Checked","Col IC: Klebsiella","Klebsiella.csv"], \
-			[237,"Unchecked","Checked","Col ID: Staphylococcus","Staphy.csv"], \
+			[237,"Unchecked","Checked","Col ID: Staphylococcus","Staph.csv"], \
 			[238,"Unchecked","Checked","Col IE: Other Organism","OtherOrganism.csv"], \
 			[239,"Unchecked","Checked","Col IF: Unknown Organism","UnknownOrganism.csv"], \
 			[240,"Unchecked","Checked","Col IG: Multiple Organism","MultipleOrganism.csv"], \
-			[252,"Unchecked","Checked","Col IS: Ciprofloxacin","Cipro.csv"], \
-			[340,"No","Yes","Col MC: Resistances","Resistances.csv"], \
-			[341,"Unchecked","Checked","Col MD: Bactrim","Bactrim.csv"], \
-			[342,"Unchecked","Checked","Col ME: Amoxicillin","Amoxicillin.csv"], \
-			[343,"Unchecked","Checked","Col MF: Augmentin","Augmentin.csv"], \
-			[344,"Unchecked","Checked","Col MG: Nitrofurantoin","Nitrofurantoin.csv"], \
-			[345,"Unchecked","Checked","Col MH: Cephalexin","Cephalexin.csv"]
-			]		
+			[372,"Unchecked","Checked","Col NI: Organism Not E.Coli","OrganismNotEColi.csv"], \
+			[243,"Unchecked","Checked","Col IJ: Resistance Ampicillin","ResAmpicillin.csv"], \
+			[244,"Unchecked","Checked","Col IK: Resistance Nitrofurantoin","ResNitrofurantoin.csv"], \
+			[245,"Unchecked","Checked","Col IL: Resistance Tetracycline","ResTetracycline.csv"], \
+			[246,"Unchecked","Checked","Col IM: Resistance Bactrim","ResBactrim.csv"], \
+			[247,"Unchecked","Checked","Col IN: Resistance Gentamycin","ResGentamycin.csv"], \
+			[248,"Unchecked","Checked","Col IO: Resistance Tobramycin","ResTobramycin.csv"], \
+			[249,"Unchecked","Checked","Col IP: Resistance Amikacin","ResAmikacin.csv"], \
+			[250,"Unchecked","Checked","Col IQ: Resistance Cefotaxime","ResCefotaxime.csv"], \
+			[251,"Unchecked","Checked","Col IR: Resistance Ceftazidime","ResCeftazidime.csv"], \
+			[252,"Unchecked","Checked","Col IS: Resistance Ciprofloxacin","ResCiprofloxacin.csv"], \
+			[253,"Unchecked","Checked","Col IT: Resistance Aztreonam","ResAztreonam.csv"], \
+			[254,"Unchecked","Checked","Col IU: Resistance Imipenem","ResImipenem.csv"], \
+			[255,"Unchecked","Checked","Col IV: Resistance Zosyn","ResZosyn.csv"], \
+			[256,"Unchecked","Checked","Col IX: Resistance Other","ResOther.csv"], \
+			[373,"Unchecked","Checked","Col NJ: All EColi","AllEColi.csv"], \
+			[374,"Unchecked","Checked","Col NK: All Proteus","AllProteus.csv"], \
+			[375,"Unchecked","Checked","Col NL: All Pseudomonas","AllPseudomonas.csv"], \
+			[376,"Unchecked","Checked","Col NM: All Enterococcus","AllEnterococcus.csv"], \
+			[377,"Unchecked","Checked","Col NN: All Klebsiella","AllKlebsiella.csv"], \
+			[378,"Unchecked","Checked","Col NO: All Staphylococcus","AllStaphylococcus.csv"], \
+			[379,"Unchecked","Checked","Col NP: All Multiple-Other Organism","AllMultipleOther.csv"], \
+			[380,"Unchecked","Checked","Col NQ: All Not EColi","AllNotEColi.csv"], \
+			[382,"Unchecked","Checked","Col NS: All Resistances Ampicillin","AllResAmpicillin.csv"], \
+			[383,"Unchecked","Checked","Col NT: All Resistances Nitrofurantoin","AllResNitrofurantoin.csv"], \
+			[384,"Unchecked","Checked","Col NU: All Resistances Tetracycline","AllResTetracycline.csv"], \
+			[385,"Unchecked","Checked","Col NV: All Resistances Bactrim","AllResBactrim.csv"], \
+			[386,"Unchecked","Checked","Col NW: All Resistances Gentamycin","AllResGentamycin.csv"], \
+			[387,"Unchecked","Checked","Col NX: All Resistances Tobramycin","AllResTobramycin.csv"], \
+			[388,"Unchecked","Checked","Col NY: All Resistances Amikacin","AllResAmikacin.csv"], \
+			[389,"Unchecked","Checked","Col NZ: All Resistances Cefotaxime","AllResCefotaxime.csv"], \
+			[390,"Unchecked","Checked","Col OA: All Resistances Ceftazidime","AllResCeftazidime.csv"], \
+			[391,"Unchecked","Checked","Col OB: All Resistances Ciprofloxacin","AllResCiprofloxacin.csv"], \
+			[392,"Unchecked","Checked","Col OC: All Resistances Aztreonam","AllResAztreonam.csv"], \
+			[393,"Unchecked","Checked","Col OD: All Resistances Imipenem","AllResImipenem.csv"], \
+			[394,"Unchecked","Checked","Col OE: All Resistances Zosyn","AllResZosyn.csv"], \
+			[395,"Unchecked","Checked","Col OF: All Resistances Other","AllResOther.csv"] \
+			]
+			#[252,"Unchecked","Checked","Col IS: Ciprofloxacin","Cipro.csv"], \
+			#[340,"No","Yes","Col MC: Resistances","Resistances.csv"], \
+			#[341,"Unchecked","Checked","Col MD: Bactrim","Bactrim.csv"], \
+			#[342,"Unchecked","Checked","Col ME: Amoxicillin","Amoxicillin.csv"], \
+			#[343,"Unchecked","Checked","Col MF: Augmentin","Augmentin.csv"], \
+			#[344,"Unchecked","Checked","Col MG: Nitrofurantoin","Nitrofurantoin.csv"], \
+			#[345,"Unchecked","Checked","Col MH: Cephalexin","Cephalexin.csv"]
+			#]		
 			
 for chkVals in chkValsAll:
 	# Initialization of variables
@@ -94,10 +132,22 @@ for chkVals in chkValsAll:
 
 	hx_cath_y=[0,0,0,"Hx Catheterizable Channel","Yes"]
 	hx_cath_n=[0,0,0,"Hx Catheterizable Channel","No"]
+	
+	hx_bowel_surg_y=[0,0,0,"Hx Surgery with bowel in urinary tract","Yes"]
+	hx_bowel_surg_n=[0,0,0,"Hx Surgery with bowel in urinary tract","No"]
+	
+	immunosuppression_y=[0,0,0,"Immunosuppression","Yes"]
+	immunosuppression_n=[0,0,0,"Immunosuppression","No"]
 
+	overnight_foley_y=[0,0,0,"Overnight Foley","Yes"]
+	overnight_foley_n=[0,0,0,"Overnight Foley","No"]
+	
 	recent_uti_y=[0,0,0,"Recent UTI","Yes"]
 	recent_uti_n=[0,0,0,"Recent UTI","No"]
 	recent_uti_unk=[0,0,0,"Recent UTI","Unknown"]
+	
+	antibiotic_prophylaxis_y=[0,0,0,"Antibiotic Prophylaxis","Yes"]
+	antibiotic_prophylaxis_n=[0,0,0,"Antibiotic Prophylaxis","No"]
 
 	VUR_1_2=[0,0,0,"VUR (grade of those with VUR)","VUR grade I to II"]
 	VUR_3_5=[0,0,0,"VUR (grade of those with VUR)","VUR grade III to V"]
@@ -297,6 +347,55 @@ for chkVals in chkValsAll:
 			hx_cath_n[2] = hx_cath_n[2]+1
 	# HxCatheterizable Channel counting section end	
 
+	# HxBowel used in urinary tract surgery counting section begin
+		if (j[178] == "Checked"): #This means yes
+			if j[chkVals[0]] == chkVals[1]:
+				hx_bowel_surg_y[1] = hx_bowel_surg_y[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				hx_bowel_surg_y[0] = hx_bowel_surg_y[0]+1
+			hx_bowel_surg_y[2] = hx_bowel_surg_y[2]+1
+		
+		if (j[178] == "Unchecked"): #This means no
+			if j[chkVals[0]] == chkVals[1]:
+				hx_bowel_surg_n[1] = hx_bowel_surg_n[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				hx_bowel_surg_n[0] = hx_bowel_surg_n[0]+1
+			hx_bowel_surg_n[2] = hx_bowel_surg_n[2]+1
+	# HxBowel used in urinary tract surgery counting section end		
+	
+	# Immunosuppression counting section begin
+		if j[85] == "Yes":
+			if j[chkVals[0]] == chkVals[1]:
+				immunosuppression_y[1] = immunosuppression_y[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				immunosuppression_y[0] = immunosuppression_y[0]+1
+			immunosuppression_y[2] = immunosuppression_y[2]+1
+		
+		if (j[85] == "No") or (j[85] == ""):
+			if j[chkVals[0]] == chkVals[1]:
+				immunosuppression_n[1] = immunosuppression_n[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				immunosuppression_n[0] = immunosuppression_n[0]+1
+			immunosuppression_n[2] = immunosuppression_n[2]+1
+	# Immunosuppression counting section end
+	
+	# Overnight foley counting section begin
+		if j[108] == "Yes":
+			if j[chkVals[0]] == chkVals[1]:
+				overnight_foley_y[1] = overnight_foley_y[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				overnight_foley_y[0] = overnight_foley_y[0]+1
+			overnight_foley_y[2] = overnight_foley_y[2]+1
+		
+		if j[108] == "No":
+			if j[chkVals[0]] == chkVals[1]:
+				overnight_foley_n[1] = overnight_foley_n[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				overnight_foley_n[0] = overnight_foley_n[0]+1
+			overnight_foley_n[2] = overnight_foley_n[2]+1
+	# Overnight foley counting section end
+	
+	
 	# Recent UTI counting section begin
 		if j[188] == "Yes":
 			if j[chkVals[0]] == chkVals[1]:
@@ -320,6 +419,22 @@ for chkVals in chkValsAll:
 			recent_uti_unk[2] = recent_uti_unk[2]+1
 	# Recent UTI Channel counting section end	
 
+	# Antibiotic Prophylaxis counting section begin
+		if j[351] == "Checked":
+			if j[chkVals[0]] == chkVals[1]:
+				antibiotic_prophylaxis_y[1] = antibiotic_prophylaxis_y[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				antibiotic_prophylaxis_y[0] = antibiotic_prophylaxis_y[0]+1
+			antibiotic_prophylaxis_y[2] = antibiotic_prophylaxis_y[2]+1
+		
+		if j[351] == "Unchecked":
+			if j[chkVals[0]] == chkVals[1]:
+				antibiotic_prophylaxis_n[1] = antibiotic_prophylaxis_n[1]+1
+			if j[chkVals[0]] == chkVals[2]:
+				antibiotic_prophylaxis_n[0] = antibiotic_prophylaxis_n[0]+1
+			antibiotic_prophylaxis_n[2] = antibiotic_prophylaxis_n[2]+1
+	# Antibiotic Prophylaxis counting section begin	
+	
 	# VUR counting section begin
 		if (j[136] == "I") or (j[136] == "II"): 
 			if j[chkVals[0]] == chkVals[1]:
@@ -429,32 +544,40 @@ for chkVals in chkValsAll:
 	MasterSubList.append(sum_greater_eighteen)
 	MasterSubList.append(sex_f)
 	MasterSubList.append(sex_m)
+	MasterSubList.append(circumcised)
+	MasterSubList.append(uncircumcised)
+	MasterSubList.append(unknown_circ)
 	MasterSubList.append(race_w)
 	MasterSubList.append(race_b)
 	MasterSubList.append(race_a)
 	MasterSubList.append(race_o)
 	MasterSubList.append(race_his)
 	MasterSubList.append(race_nhis)
-	MasterSubList.append(circumcised)
-	MasterSubList.append(uncircumcised)
-	MasterSubList.append(unknown_circ)
-	MasterSubList.append(hydro_yes)
-	MasterSubList.append(hydro_no)
+	MasterSubList.append(etiology_myel)
+	MasterSubList.append(etiology_fatt)
+	MasterSubList.append(etiology_othe)
 	MasterSubList.append(hx_augmentation_y)
 	MasterSubList.append(hx_augmentation_n)
 	MasterSubList.append(hx_cath_y)
 	MasterSubList.append(hx_cath_n)
+	MasterSubList.append(hx_bowel_surg_y)
+	MasterSubList.append(hx_bowel_surg_n)
+	MasterSubList.append(immunosuppression_y)
+	MasterSubList.append(immunosuppression_n)
+	MasterSubList.append(overnight_foley_y)
+	MasterSubList.append(overnight_foley_n)
 	MasterSubList.append(recent_uti_y)
 	MasterSubList.append(recent_uti_n)
 	MasterSubList.append(recent_uti_unk)
+	MasterSubList.append(antibiotic_prophylaxis_y)
+	MasterSubList.append(antibiotic_prophylaxis_n)
+	MasterSubList.append(VUR_y)
+	MasterSubList.append(VUR_n)
 	MasterSubList.append(VUR_1_2)
 	MasterSubList.append(VUR_3_5)
 	MasterSubList.append(VUR_unk)
-	MasterSubList.append(VUR_y)
-	MasterSubList.append(VUR_n)
-	MasterSubList.append(etiology_myel)
-	MasterSubList.append(etiology_fatt)
-	MasterSubList.append(etiology_othe)
+	MasterSubList.append(hydro_yes)
+	MasterSubList.append(hydro_no)
 	MasterSubList.append(hydro_grade0)
 	MasterSubList.append(hydro_grade1)
 	MasterSubList.append(hydro_grade2)

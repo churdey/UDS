@@ -1,4 +1,4 @@
-,,Overall,,Col IF: Unknown Organism
+,,Overall,,Col NQ: All Unknown
 ,,,,Yes,,No
 ,,N,% of Total,N,% of cohort,N,% of cohort
 Overall,,269,,0,,269
@@ -35,8 +35,6 @@ Overnight Foley,No,240,89.22%,0,0.0%,240,100.0%,
 Recent UTI,Yes,33,12.27%,0,0.0%,33,100.0%,
 Recent UTI,No,233,86.62%,0,0.0%,233,100.0%,
 Recent UTI,Unknown,3,1.12%,0,0.0%,3,100.0%,
-Antibiotic Prophylaxis,Yes,72,26.77%,0,0.0%,72,100.0%,
-Antibiotic Prophylaxis,No,197,73.23%,0,0.0%,197,100.0%,
 VUR (most recent test),Yes,44,16.36%,0,0.0%,44,100.0%,
 VUR (most recent test),No,225,83.64%,0,0.0%,225,100.0%,
 VUR (grade of those with VUR),VUR grade I to II,15,5.58%,0,0.0%,15,100.0%,
